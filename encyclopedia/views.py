@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from markdown2 import markdown
 from . import util
 
 
@@ -15,6 +15,6 @@ def entry_page(request, entry_title):
         return HttpResponse("The requested entry does not exist.")
     else: 
         return render(request, "encyclopedia/entry_page.html", {
-            "entry": util.get_entry(entry_title),
+            "entry": markdown(entry),
             "entry_title": entry_title
         })
