@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from markdown2 import markdown
 from . import util
-
+from . import forms
 
 def index(request):
     return render(request, "encyclopedia/index.html", {
@@ -18,3 +18,4 @@ def entry_page(request, entry_title):
             "entry": markdown(entry),
             "entry_title": entry_title
         })
+
