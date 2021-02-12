@@ -1,0 +1,31 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Wiki | Search results
+{% endblock %}
+
+{% block body %}
+    <div>
+        {% if no_match %}
+            <div class="container">
+                <p class="text-center">
+                    {{ no_match }}
+                </p>
+            </div>
+        {% elif possible_matches %}
+            <div class="container">
+                <p class="text-center">
+                    Possible matches for {{ search_term }}
+                </p>
+                <ul>
+                    {% for entry in possible_matches %}
+                        <li><a href="{% url 'wiki:entry_title' entry_title=entry %}">{{ entry }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        
+        
+    </div>
+
+{% endblock %}
