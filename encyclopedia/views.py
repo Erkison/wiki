@@ -4,6 +4,7 @@ from markdown2 import markdown
 from . import util
 from . import forms
 from django.views.generic import ListView
+from django.urls import reverse
 
 def index(request):
     return render(request, "encyclopedia/index.html", {
@@ -22,7 +23,7 @@ def entry_page(request, entry_title):
 
 def search_results_page(request):
     entries_list = [entry.lower() for entry in util.list_entries()]
-    search_term = request.POST.get("q", "").lower()
+    search_term = request.GET.get("search_field")
     possible_matches = []
 
     for entry in entries_list:
@@ -30,7 +31,7 @@ def search_results_page(request):
             possible_matches.append(entry)
 
     if search_term in entries_list:
-        return HttpResponseRedirect(f"encyclopedia/{search_term}")
+        return HttpResponseRedirect(reverse("wiki:entry_title", args=(search_term,)))
 
     elif possible_matches:
         return render(request, "encyclopedia/search_results.html", {
@@ -39,7 +40,8 @@ def search_results_page(request):
         })
     else:
         return render(request, "encyclopedia/search_results.html", {
-            "no_match": f"Your search terms '{search_term}' did not match any entries."
+            "no_match": f"Your search term '{search_term}' did not match any entries.",
+            "search_term":search_term
         })
 
 
