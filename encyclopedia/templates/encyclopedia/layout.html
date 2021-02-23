@@ -14,14 +14,21 @@
                 <h2>Wiki</h2>
                 <form method="get" action="{% url 'wiki:search_results' %}">
                     {% csrf_token %}
-                    <div class="d-flex flex-column justify-content-center p-1">
-                        <div>
-                            {{ search_form }}
+                    {% for field in search_form %}
+                        <div class="form-group">
+                            <label for="{{ field.id_for_label }}" class="label sr-only">{{ field.html_name|lower|capfirst }}</label>
+                            {{ field }}
+                            {% if field.help_text %}
+                                <p class="form-text text-muted">{{ field.help_text }}</p>
+                            {% endif %}
+                            {% if form.field.errors %}
+                                <p class="form-text text-danger">{{ field.errors }}</p>
+                            {% endif %}
                         </div>
-                        <button class="btn btn-dark" type="submit">
-                                Search
-                        </button>
-                    </div>
+                    {% endfor %}
+                    <button class="btn btn-dark" type="submit">
+                            Search
+                    </button>
                 </form>
                 <div>
                     <a href="{% url 'wiki:index' %}">Home</a>
