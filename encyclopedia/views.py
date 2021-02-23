@@ -22,10 +22,10 @@ def entry_page(request, entry_title):
         })
 
 def create_new_entry(request):
-    form = forms.CreateNewEntryForm
+    form = forms.CreateNewEntryForm()
     return render(request, "encyclopedia/create_new_entry.html",{
         "entry_title": "Create new entry",
-        "form": form
+        "form": form,
     })
 
 def search_results_page(request):

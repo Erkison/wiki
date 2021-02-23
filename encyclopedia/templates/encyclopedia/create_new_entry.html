@@ -5,10 +5,22 @@
 {% endblock %}
 
 {% block body %}
-    <div>
-        <form>
+    <div class="container"
+        <form method="post">
             {% csrf_token %}
-            {{ form }}
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}" class="label">{{ field.html_name|lower|capfirst }}</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <p class="form-text text-muted">{{ field.help_text }}</p>
+                    {% endif %}
+                    {% if form.field.errors %}
+                        <p class="form-text text-danger">{{ field.errors }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <button class="btn btn-dark" type="submit">Create entry</button>
         </form>
     </div>
 
