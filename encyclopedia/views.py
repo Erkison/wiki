@@ -21,6 +21,13 @@ def entry_page(request, entry_title):
             "entry_title": entry_title
         })
 
+def create_new_entry(request):
+    form = forms.CreateNewEntryForm
+    return render(request, "encyclopedia/create_new_entry.html",{
+        "entry_title": "Create new entry",
+        "form": form
+    })
+
 def search_results_page(request):
     entries_list = [entry.lower() for entry in util.list_entries()]
     search_term = request.GET.get("search_field")
