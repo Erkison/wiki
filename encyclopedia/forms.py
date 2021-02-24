@@ -10,5 +10,6 @@ class CreateNewEntryForm(forms.Form):
         "class":"form-control border border-dark"
     }))
     markdown_content = forms.CharField(widget=forms.Textarea(attrs={
-        "class":"form-control border border-dark"
+        "class":"form-control border border-dark",
+        "placeholder": "Please use markdown syntax for entry content"
     }))

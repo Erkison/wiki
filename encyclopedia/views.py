@@ -18,13 +18,27 @@ def entry_page(request, entry_title):
     else: 
         return render(request, "encyclopedia/entry_page.html", {
             "entry": markdown(entry),
-            "entry_title": entry_title
+            "entry_title": entry_title,
         })
 
 def create_new_entry(request):
-    form = forms.CreateNewEntryForm()
+    if request.method == "POST":
+        form = forms.CreateNewEntryForm(request.POST)
+        if form.is_valid():
+            entry_title = form.cleaned_data["title"]
+            entry_content = form.cleaned_data["markdown_content"]
+            entries_list = [entry.lower() for entry in util.list_entries()]
+            if entry_title.lower() in entries_list:
+                return HttpResponse(f'An entry with title: {entry_title} already exists')
+            else:
+                util.save_entry(entry_title.capitalize(), entry_content)
+                return HttpResponseRedirect(reverse("wiki:entry_title", args=(entry_title,)))
+
+        else: pass
+
+    elif request.method == "GET":
+        form = forms.CreateNewEntryForm()
     return render(request, "encyclopedia/create_new_entry.html",{
-        "entry_title": "Create new entry",
         "form": form,
     })
 

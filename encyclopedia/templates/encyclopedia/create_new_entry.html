@@ -1,11 +1,15 @@
 {% extends "encyclopedia/layout.html" %}
 
 {% block title %}
-    {{ entry_title }}
+    Wiki | Create new entry
 {% endblock %}
 
 {% block body %}
-    <div class="container"
+    <div class="container">
+        <h2>Create new entry</h2>
+    </div>
+    <div class="container mt-3">
+        <p>Please complete the form below to create a new encyclopedia entry</p>
         <form method="post">
             {% csrf_token %}
             {% for field in form %}
