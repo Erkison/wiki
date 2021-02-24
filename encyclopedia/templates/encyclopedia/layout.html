@@ -9,8 +9,8 @@
         <link href="{% static 'encyclopedia/styles.css' %}" rel="stylesheet">
     </head>
     <body>
-        <div class="row">
-            <div class="sidebar d-flex flex-column col-lg-2 col-sm-4 col-xs-12">
+        <div class="row container-fluid page-content">
+            <div class="container m-auto sidebar d-flex flex-column col-lg-2 col-sm-4 col-xs-12">
                 <h2>Wiki</h2>
                 <form method="get" action="{% url 'wiki:search_results' %}">
                     {% csrf_token %}

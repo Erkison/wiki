@@ -12,9 +12,8 @@ h1 {
     padding-top: 20px;
 }
 
-textarea {
-    height: 90vh;
-    width: 80%;
+.page-content {
+    margin: 0;
 }
 
 .main {
@@ -22,7 +21,7 @@ textarea {
 }
 
 .sidebar {
-    background-color: #f0f0f0;
+    background-color: rgba(159, 119, 233, 0.774);
     height: 100vh;
     padding: 10px;
 }
@@ -31,8 +30,8 @@ textarea {
     margin-top: 5px;
 }
 
-@media screen and (max-width: 414px) {
+@media screen and (max-width: 600px) {
     .sidebar {
-        height: 400px;
+        height: auto;
     }
 }
