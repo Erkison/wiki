@@ -12,6 +12,7 @@ def index(request):
     })
 
 def entry_page(request, entry_title):
+    entry_title = entry_title.lower()
     entry = util.get_entry(entry_title)
     if entry == None:
         return HttpResponse("The requested entry does not exist.")
@@ -40,6 +41,26 @@ def create_new_entry(request):
         form = forms.CreateNewEntryForm()
     return render(request, "encyclopedia/create_new_entry.html",{
         "form": form,
+    })
+
+def edit_entry_page(request, *args, **kwargs):
+    entry_title = kwargs["entry_title"]
+    entry = util.get_entry(entry_title)
+    entry_form_data = {
+        "title": entry_title,
+        "markdown_content": entry
+    }
+    if request.method == "GET":
+        form = forms.CreateNewEntryForm(initial=entry_form_data)
+    if request.method == "POST":
+        form = forms.CreateNewEntryForm(request.POST)
+        if form.is_valid():
+            entry_title = form.cleaned_data["title"]
+            entry_content = form.cleaned_data["markdown_content"]
+            util.save_entry(entry_title.capitalize(), entry_content)
+            return HttpResponseRedirect(reverse("wiki:entry_title", args=(entry_title,)))
+    return render(request, "encyclopedia/edit_entry.html", {
+        "form":form
     })
 
 def search_results_page(request):

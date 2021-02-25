@@ -1,3 +1,3 @@
 # Bootstrap #
 
-Bootstrap is a styling framework used to add styling to [HTML](/wiki/HTML) pages.
+Bootstrap is a styling framework used to add styling to [HTML](/HTML) pages.

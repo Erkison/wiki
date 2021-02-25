@@ -1,0 +1,31 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Wiki | Edit entry
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h2>Edit entry</h2>
+    </div>
+    <div class="container mt-3">
+        <p>Edit the entry below</p>
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}" class="label">{{ field.html_name|lower|capfirst }}</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <p class="form-text text-muted">{{ field.help_text }}</p>
+                    {% endif %}
+                    {% if form.field.errors %}
+                        <p class="form-text text-danger">{{ field.errors }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <button class="btn btn-dark" type="submit">Save</button>
+        </form>
+    </div>
+
+{% endblock %}
