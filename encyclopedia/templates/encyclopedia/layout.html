@@ -30,14 +30,16 @@
                             Search
                     </button>
                 </form>
-                <div>
-                    <a href="{% url 'wiki:index' %}">Home</a>
-                </div>
-                <div>
-                    <a href="{% url 'wiki:create_new_entry' %}">Create New Page</a>
-                </div>
-                <div>
-                    Random Page
+                <div class="sidebar_links">
+                    <div>
+                        <a class="btn" href="{% url 'wiki:index' %}">Home</a>
+                    </div>
+                    <div>
+                        <a class="btn" href="{% url 'wiki:create_new_entry' %}">Create New Page</a>
+                    </div>
+                    <div>
+                        <a class="btn" href="{% url 'wiki:random_entry_page' %}">Random Page</a>
+                    </div>
                 </div>
                 {% block nav %}
                 {% endblock %}

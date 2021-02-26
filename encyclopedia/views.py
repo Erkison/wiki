@@ -5,6 +5,7 @@ from . import util
 from . import forms
 from django.views.generic import ListView
 from django.urls import reverse
+import random
 
 def index(request):
     return render(request, "encyclopedia/index.html", {
@@ -21,6 +22,11 @@ def entry_page(request, entry_title):
             "entry": markdown(entry),
             "entry_title": entry_title,
         })
+
+def random_entry_page(request):
+    entries = util.list_entries()
+    random_entry = random.choice(entries)
+    return HttpResponseRedirect(reverse("wiki:entry_title", args=(random_entry,)))
 
 def create_new_entry(request):
     if request.method == "POST":
