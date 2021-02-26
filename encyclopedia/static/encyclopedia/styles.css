@@ -31,8 +31,24 @@ h1 {
     margin-top: 5px;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-device-width: 500px) {
     .sidebar {
         height: auto;
     }
+}
+
+.my-button {
+    background-color: rgba(159, 119, 233, 0.774) !important;
+    color: #010101;
+}
+.my-button:hover {
+    color: #f5f5f5;
+}
+
+.sidebar-link {
+    text-decoration: none;
+    color: #010101;
+}
+.sidebar-link:hover {
+    color: blanchedalmond;
 }

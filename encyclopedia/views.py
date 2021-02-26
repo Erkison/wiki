@@ -66,7 +66,8 @@ def edit_entry_page(request, *args, **kwargs):
             util.save_entry(entry_title.capitalize(), entry_content)
             return HttpResponseRedirect(reverse("wiki:entry_title", args=(entry_title,)))
     return render(request, "encyclopedia/edit_entry.html", {
-        "form":form
+        "form":form,
+        "entry_title":entry_title,
     })
 
 def search_results_page(request):
