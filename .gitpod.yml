@@ -5,6 +5,7 @@ tasks:
       source venv/bin/activate
       pip install --upgrade pip wheel setuptools
       pip install Django
+      pip install markdown2
       python manage.py migrate
     command: |
       source venv/bin/activate
